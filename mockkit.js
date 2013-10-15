@@ -20,7 +20,7 @@ function MockKit(req, res, rules, regex_rules) {
           res.end(data);
         });
       } else if (_i == (keys.length - 1) && !isHitted) {
-        missCallback(req, res, return500);
+        missCallback(req, res, return404);
       }
     }
   }
@@ -40,7 +40,7 @@ function MockKit(req, res, rules, regex_rules) {
     });
   }
   
-  function return500(req, res) {
+  function return404(req, res) {
     console.log("return500: "+ req.url);
     
     res.writeHead(404, {'Content-Type': 'text/html'});
