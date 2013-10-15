@@ -1,21 +1,20 @@
 var fs = require('fs');
-var async = require('async');
-function MockKit(req, res, rules, regex_rules) {
+
+function MockKit(req, res, rules) {
   this.req = req;
   this.res = res;
   this.rules = rules;
-  this.regex_rules = regex_rules;
 
-  function returnSpecificResource(req, res, rules, regex_rules, missCallback) {
+  function returnSpecificResource(req, res, rules, missCallback) {
     console.log("returnSpecificResource: "+ req.url);
     
     var keys = Object.keys(rules);
     var isHitted = false;
     
     for (var _i = 0, _len = keys.length; _i < _len; _i++) {
-      if (req.url.match(regex_rules[keys[_i]])) {
+      if (req.url.match(rules[keys[_i]][0])) {
         isHitted = true;
-        fs.readFile(rules[keys[_i]], function (err, data) {
+        fs.readFile(rules[keys[_i]][1], function (err, data) {
           if (err) throw err;
           res.end(data);
         });
@@ -49,7 +48,7 @@ function MockKit(req, res, rules, regex_rules) {
   
   this.run = function () {
     console.log(this.req.url);
-    returnSpecificResource(this.req, this.res, this.rules, this.regex_rules, returnStaticResource);
+    returnSpecificResource(this.req, this.res, this.rules, returnStaticResource);
   }
 }
 

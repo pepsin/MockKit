@@ -1,22 +1,13 @@
 var http = require('http');
 var MockKit = require("./mockkit.js");
+var routes = require('./routes.js')
 
 console.log("Listening 127.0.0.1:1234");
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   
-  var regex_rules = {
-    index: /\/$/,
-    dude: "/great_dude/hello"
-  };
-  
-  var rules = {
-    index: "./small_test.html",
-    dude: "./x.json"
-  };
-  
-  var m = new MockKit(req, res, rules, regex_rules);
+  var m = new MockKit(req, res, routes);
   
   m.run();
   
