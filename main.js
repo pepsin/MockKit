@@ -1,25 +1,20 @@
 var http = require('http');
 var MockKit = require("./mockkit.js");
-
+console.log("Listening 127.0.0.1:1234");
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
+  
   var regex_rules = {
     index: /\/$/
-  }
+  };
   
   var rules = {
-    index: "./small_test.html",
-  }
+    index: "./small_test.html"
+  };
+  
   var m = new MockKit(req, res, rules, regex_rules);
   
-  console.log(req.url);
+  m.run();
   
-  //m.returnStaticResource();
-  
-  m.returnSpecificResource(/\/$/, "./small_test.html");
-  
-  m.returnJson(/hello.json$/, '{"url":"hello.com", "err":""}\n');
-  
-}).listen(1234, '0.0.0.0');
-console.log("Listening 0.0.0.0:1234");
+}).listen(1234, '127.0.0.1');
