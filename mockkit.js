@@ -5,67 +5,53 @@ function MockKit(req, res, rules, regex_rules) {
   this.res = res;
   this.rules = rules;
   this.regex_rules = regex_rules;
-  this.is_not_hitted = true;
+
+  function returnSpecificResource(req, res, rules, regex_rules, missCallback) {
+    console.log("returnSpecificResource: "+ req.url);
+    
+    var keys = Object.keys(rules);
+    var isHitted = false;
+    
+    for (var _i = 0, _len = keys.length; _i < _len; _i++) {
+      if (req.url.match(regex_rules[keys[_i]])) {
+        isHitted = true;
+        fs.readFile(rules[keys[_i]], function (err, data) {
+          if (err) throw err;
+          res.end(data);
+        });
+      } else if (_i == (keys.length - 1) && !isHitted) {
+        missCallback(req, res, return500);
+      }
+    }
+  }
   
-  this.returnStaticResource = function(nextFunc) {
-    console.log("returnStaticResource: "+ this.req.url);
-    req = this.req;
-    res = this.res;
-    self = this;
+   function returnStaticResource(req, res, missCallback) {
+    console.log("returnStaticResource: "+ req.url);
+    
     fs.exists(req.url.slice(1), function (exists) {
       if (exists && !req.url.match(/\/$/)) {
         fs.readFile("." + req.url, function (err, data) {
           if (err) throw err;
           res.end(data);
-          return self;
         }); 
+      } else {
+        missCallback(req, res);
       }
     });
   }
   
-  this.returnSpecificResource = function(nextFunc) {
-    console.log("returnSpecificResource: "+ this.req.url);
-    req = this.req;
-    res = this.res;
-    self = this;
-    var hitted_data;
-    for (var key in self.rules) {
-      if (req.url.match(self.regex_rules[key]) && self.is_not_hitted) {
-        fs.readFile("." + req.url, function (err, data) {
-          if (err) throw err;
-          res.end(data);
-          return self;
-        });
-      }
-    }
-  }
-  
-  this.return500 = function () {
-    console.log("return500: "+ self.req.url);
-    req = this.req;
-    res = this.res;
-    self = this;
+  function return500(req, res) {
+    console.log("return500: "+ req.url);
     
-    res.writeHead(500, {'Content-Type': 'text/html'});
+    res.writeHead(404, {'Content-Type': 'text/html'});
     res.end("");
-    self.is_not_hitted = false;
-    
-    return self;
   }
   
   this.run = function () {
     console.log(this.req.url);
-    self = this;
-    if (self.returnSpecificResource()) {
-      
-    } else if (self.returnStaticResource()) {
-      
-    } else {
-      self.return500();
-    }
+    returnSpecificResource(this.req, this.res, this.rules, this.regex_rules, returnStaticResource);
   }
 }
-
 
 exports = MockKit;
 

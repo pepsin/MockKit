@@ -6,11 +6,13 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   
   var regex_rules = {
-    index: /\/$/
+    index: /\/$/,
+    dude: "/great_dude/hello"
   };
   
   var rules = {
-    index: "./small_test.html"
+    index: "./small_test.html",
+    dude: "./x.json"
   };
   
   var m = new MockKit(req, res, rules, regex_rules);
