@@ -1,0 +1,34 @@
+{
+    "author": {
+        "email": "pepsin@me.com",
+        "name": "Pepsin Ye"
+    },
+    "bin": {
+        "mockkit": "./bin/mockkit"
+    },
+    "dependencies": {
+        "commander": ">=1.0.0"
+    },
+    "description": "A mockup server to eliminate those hassle of preprare the backend server for front-end programmer",
+    "directories": {
+        "bin": "./bin",
+        "lib": "./lib"
+    },
+    "keywords": [
+        "CLI",
+        "Mockup",
+        "Server"
+    ],
+    "license": "BSD",
+    "main": "./bin",
+    "name": "MockKit",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pepsin/MockKit"
+    },
+    "scripts": {
+        "test": "./bin/clitutorial -h"
+    },
+    "url": "http://pepsin.me",
+    "version": "0.007"
+}
