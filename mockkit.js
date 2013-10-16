@@ -14,12 +14,19 @@ function MockKit(req, res, rules) {
     for (var _i = 0, _len = keys.length; _i < _len; _i++) {
       if (req.url.match(rules[keys[_i]][0])) {
         isHitted = true;
-        fs.readFile(rules[keys[_i]][1], function (err, data) {
+        file = rules[keys[_i]][1]
+        console.log("SpecificFile:"+file);
+        fs.readFile(file, function (err, data) {
+          if (file.match(/\.json$/)) {
+              res.writeHead(200, {'Content-Type': 'application/json'});
+          }
           if (err) throw err;
           res.end(data);
         });
-      } else if (_i == (keys.length - 1) && !isHitted) {
-        missCallback(req, res, return404);
+      } else {
+        if (_i == (keys.length - 1) && !isHitted) {
+          missCallback(req, res, return404);
+        }
       }
     }
   }
