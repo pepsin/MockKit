@@ -30,5 +30,5 @@
         "test": "./bin/clitutorial -h"
     },
     "url": "http://pepsin.me",
-    "version": "0.0.8"
+    "version": "0.0.9"
 }
