@@ -21,7 +21,7 @@
     ],
     "license": "BSD",
     "main": "./bin",
-    "name": "MockKit",
+    "name": "mockkit",
     "repository": {
         "type": "git",
         "url": "https://github.com/pepsin/MockKit"
@@ -30,5 +30,5 @@
         "test": "./bin/clitutorial -h"
     },
     "url": "http://pepsin.me",
-    "version": "0.007"
+    "version": "0.0.8"
 }
