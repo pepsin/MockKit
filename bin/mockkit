@@ -1,16 +1,3 @@
-#!/usr/bin/env node
+#!/usr/local/bin/env node
 
-var http = require('http');
-var MockKit = require("../lib/mockkit.js");
-var routes = require('routes.js')
-
-console.log("MockKit listening on 127.0.0.1:1234");
-
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  
-  var m = new MockKit(req, res, routes);
-  
-  m.run();
-  
-}).listen(1234, '127.0.0.1');
+console.log("Hello");
