@@ -13,7 +13,7 @@ And write the routes like below:
 
 	{
 		#Label  | Route Rule  | Mock File
-  		"index" : ["/\/$/", "./small_test.html"],
+  		"index" : ["/", "./small_test.html"],
   		"dude" : ["/great_dude/hello", "./x.json"]
 	}
 	
