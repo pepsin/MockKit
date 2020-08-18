@@ -1,11 +1,11 @@
-#MockKit - Eliminate the backend hassle
+# MockKit - Eliminate the backend hassle
 ![alt text](mockkit.png "MockKit Logo")
 
-##Install MockKit
+## Install MockKit
 
-	sudo npm install mockkit -g
+	npm install mockkit -g
 
-##Use MockKit
+## Use MockKit
 
 Prepare a `routes.json` in the working directory.
 
